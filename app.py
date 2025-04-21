@@ -27,18 +27,39 @@ def main():
     no_of_special_requests = st.slider("Number of Special Requests", min_value=0, max_value=5, value=1)
     
     if st.button('Make Prediction'):
-        features = [no_of_adults, no_of_children, no_of_weekend_nights, no_of_week_nights, type_of_meal_plan, 
-                    required_car_parking_space, room_type_reserved, lead_time, market_segment_type, repeated_guest, 
-                    no_of_previous_cancellations, no_of_previous_bookings_not_canceled, avg_price_per_room, no_of_special_requests]
-        result = make_prediction(features)
-        inverse_encode = {0: 'Not_Canceled', 1: 'Canceled'}
-        original_result = [inverse_encode[p] for p in result]
-        st.success(f'The prediction is: {original_result}')
+        input_data = pd.DataFrame([{
+            'no_of_adults': no_of_adults,
+            'no_of_children': no_of_children,
+            'no_of_weekend_nights': no_of_weekend_nights,
+            'no_of_week_nights': no_of_week_nights,
+            'type_of_meal_plan': type_of_meal_plan,
+            'required_car_parking_space': 0 if required_car_parking_space == 'Not Required' else 1,
+            'room_type_reserved': room_type_reserved,
+            'lead_time': lead_time,
+            'market_segment_type': market_segment_type,
+            'repeated_guest': 0 if repeated_guest == 'No' else 1,
+            'no_of_previous_cancellations': no_of_previous_cancellations,
+            'no_of_previous_bookings_not_canceled': no_of_previous_bookings_not_canceled,
+            'avg_price_per_room': avg_price_per_room,
+            'no_of_special_requests': no_of_special_requests
+        }])
 
-def make_prediction(features):
-    input_array = np.array(features).reshape(1, -1)
-    prediction = model.predict(input_array)
-    return prediction[0]
+        input_data['market_segment_type'] = input_data['market_segment_type'].map(ord_map)
+
+        ohe_cols = ['type_of_meal_plan', 'room_type_reserved']
+        encode = ohe.transform(input_data[ohe_cols])
+        ohe_df = pd.DataFrame(encode, columns=ohe.get_feature_names_out(ohe_cols))
+        
+        input_data = input_data.drop(ohe_cols, axis = 1)
+        input_data = pd.concat([input_data, ohe_df], axis=1)
+
+        scale_cols = ['no_of_adults', 'no_of_children', 'no_of_weekend_nights', 'no_of_week_nights',
+              'lead_time', 'repeated_guest', 'no_of_previous_cancellations','no_of_previous_bookings_not_canceled','avg_price_per_room', 'no_of_special_requests']
+        input_data[scale_cols] = scaler.transform(input_data[scale_cols])
+
+        prediction = model.predict(input_data)[0]
+        label = label_map[prediction]
+        st.success(f'The booking is predicted to be: {label}')
 
 if __name__ == '__main__':
     main()
