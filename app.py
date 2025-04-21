@@ -6,6 +6,7 @@ import numpy as np
 scaler = pkl.load(open("scaler.pkl", "rb"))
 ohe = pkl.load(open("onehot.pkl", "rb"))
 label_map = pkl.load(open("label_map.pkl", "rb"))
+ord_map = pkl.load(open("ordinal_map.pkl", "rb"))
 model = pkl.load(open("TunedXG.pkl", "rb"))
 
 def main():
