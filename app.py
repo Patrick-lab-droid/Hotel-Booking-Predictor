@@ -62,7 +62,30 @@ def main():
         inverse_encode = {0: 'Not Canceled', 1: 'Canceled'}
         original_result = inverse_encode[prediction]
         st.success(f'The booking is predicted to be: {original_result}')
+        
+def show_example_table():
+    data = {
+        'no_of_adults': [2, 3],
+        'no_of_children': [3, 2],
+        'no_of_weekend_nights': [4, 2],
+        'no_of_week_nights': [5, 10],
+        'type_of_meal_plan': ['Meal Plan 3', 'Meal Plan 2'],
+        'required_car_parking_space': ['Required 1', 'Required 0'],
+        'room_type_reserved': ['Room_Type 2', 'Room_Type 3'],
+        'lead_time': [87, 223],
+        'market_segment_type': ['Corporate', 'Online'],
+        'repeated_guest': ["No, 0", "No, 0"],
+        'no_of_previous_cancellations': [4, 6],
+        'no_of_previous_bookings_not_canceled': [0, 7],
+        'avg_price_per_room': [325, 180],
+        'no_of_special_requests': [2, 1],
+        'Prediction': ['Not_Canceled', 'Canceled']
+    }
 
+    df = pd.DataFrame(data)
+    st.subheader("Example Prediction Cases")
+    st.dataframe(df)
 
 if __name__ == '__main__':
     main()
+    show_example_table()
