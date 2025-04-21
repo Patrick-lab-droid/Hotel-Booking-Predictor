@@ -19,7 +19,7 @@ def main():
     required_car_parking_space = st.selectbox("Required Car Parking Space", [('Not Required', 0), ('Required', 1)])
     room_type_reserved = st.selectbox("Room Type Reserved", ["Room_Type 1", "Room_Type 2", "Room_Type 3"])
     lead_time = st.slider("Lead Time", min_value=0, max_value=443, value=1)
-    market_segment_type = st.selectbox("Market Segment Type", ["Online", "Offline", "Travel Agent"])
+    market_segment_type = st.selectbox("Market Segment Type", ["Complementary", "Offline", "Online", "Aviation", 'Corporate'])
     repeated_guest = st.selectbox("Repeated Guest", [('No', 0), ('Yes', 1)])
     no_of_previous_cancellations = st.slider("Number of Previous Cancellations", min_value=0, max_value=13, value=1)
     no_of_previous_bookings_not_canceled = st.slider("Number of Previous Bookings Not Canceled", min_value=0, max_value=58, value=1)
