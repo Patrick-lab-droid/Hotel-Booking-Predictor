@@ -59,8 +59,10 @@ def main():
         input_data[scale_cols] = scaler.transform(input_data[scale_cols])
 
         prediction = model.predict(input_data)[0]
-        label = label_map[prediction]
-        st.success(f'The booking is predicted to be: {label}')
+        inverse_encode = {0: 'Not Canceled', 1: 'Canceled'}
+        original_result = inverse_encode[prediction]
+        st.success(f'The booking is predicted to be: {original_result}')
+
 
 if __name__ == '__main__':
     main()
