@@ -12,11 +12,11 @@ model = pkl.load(open("TunedXG.pkl", "rb"))
 def main():
     st.title('Hotel Booking Prediction')
     
-    no_of_adults = st.slider("Number of Adults", min_value=1, max_value=4, value=1)
+    no_of_adults = st.slider("Number of Adults", min_value=0, max_value=4, value=1)
     no_of_children = st.slider("Number of Children", min_value=0, max_value=10, value=1)
     no_of_weekend_nights = st.slider("Number of Weekend Nights", min_value=0, max_value=7, value=1)
     no_of_week_nights = st.slider("Number of Week Nights", min_value=0, max_value=17, value=1)
-    type_of_meal_plan = st.selectbox("Type of Meal Plan", ["Meal Plan 1", "Meal Plan 2", "Meal Plan 3"])
+    type_of_meal_plan = st.selectbox("Type of Meal Plan", ["Not Selected","Meal Plan 1", "Meal Plan 2", "Meal Plan 3"])
     required_car_parking_space = st.selectbox("Required Car Parking Space", [('Not Required', 0), ('Required', 1)])
     room_type_reserved = st.selectbox("Room Type Reserved", ["Room_Type 1", "Room_Type 2", "Room_Type 3"])
     lead_time = st.slider("Lead Time", min_value=0, max_value=443, value=1)
