@@ -1,3 +1,2 @@
-Hotel Room Booking Predictor
 Hotel Booking Prediction App 🏨🔮 — A machine learning project that predicts booking status using guest details such as number of adults/children, stay duration, meal plan, room type, lead time, cancellations, price, and special requests. The model is integrated with Streamlit, providing an interactive web app where users can input booking information and instantly see whether the reservation is likely to be confirmed or canceled. This project highlights how ML can enhance hotel operations, optimize revenue strategies, and deliver actionable customer insights.
 Streamlit link: https://hotelbookingpredictor-patrick.streamlit.app/
